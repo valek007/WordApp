@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class WordApp {
 
@@ -26,6 +28,8 @@ public class WordApp {
 
     static class MyPanel extends JPanel{
 
+        //---------Menu Bar-------------------------
+
         private JPanel menuPanel = new JPanel();
         private JMenuBar menuBar = new JMenuBar();
         private JMenu fontWord = new JMenu("Font");
@@ -46,9 +50,15 @@ public class WordApp {
         private JMenuItem size_20 = new JMenuItem("20");
         private JMenuItem size_24 = new JMenuItem("24");
 
+        //--------Text Area---------------------------
+
+        private JTextPane myArea = new JTextPane();
+
         public MyPanel() {
 
             setLayout(new BorderLayout());
+
+            //----Menu Bar------------------------------
 
             menuBar.add(fontWord);
             menuBar.add(styleWord);
@@ -59,8 +69,26 @@ public class WordApp {
             //-------------------------------------------
 
             fontWord.add(arial);
+            arial.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    myArea.setFont(new Font("Arial",Font.PLAIN,12));
+                }
+            });
             fontWord.add(courier);
+            courier.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    myArea.setFont(new Font("Courier",Font.PLAIN,12));
+                }
+            });
             fontWord.add(verdana);
+            verdana.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    myArea.setFont(new Font("Verdana",Font.PLAIN,12));
+                }
+            });
 
             styleWord.add(bold);
             styleWord.add(italic);
@@ -69,6 +97,10 @@ public class WordApp {
             sizeWord.add(size_16);
             sizeWord.add(size_20);
             sizeWord.add(size_24);
+
+            //-----Text Area-----------------------------
+
+            add(myArea,BorderLayout.CENTER);
 
         }
     }
