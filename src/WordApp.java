@@ -58,17 +58,17 @@ public class WordApp {
 
             //-----Menu Items---------------------------
 
-            menuConfig("Arial","font","",0,0);
-            menuConfig("Courier","font","",0,0);
-            menuConfig("Verdana","font","",0,0);
+            menuConfig("Arial","font","Arial",9,10);
+            menuConfig("Comic Sans","font","Comic Sans MS",9,10);
+            menuConfig("Verdana","font","Verdana",9,10);
 
-            menuConfig("Bold","style","",0,0);
-            menuConfig("Italic","style","",0,0);
+            menuConfig("Bold","style","",Font.BOLD,10);
+            menuConfig("Italic","style","",Font.ITALIC,10);
 
-            menuConfig("12","size","",0,0);
-            menuConfig("16","size","",0,0);
-            menuConfig("20","size","",0,0);
-            menuConfig("24","size","",0,0);
+            menuConfig("12","size","",9,12);
+            menuConfig("16","size","",9,16);
+            menuConfig("20","size","",9,20);
+            menuConfig("24","size","",9,24);
 
         }
 
@@ -80,7 +80,26 @@ public class WordApp {
             else if(menu.equals("style")) styleWord.add(menu_element);
             else if(menu.equals("size")) sizeWord.add(menu_element);
 
+            menu_element.addActionListener(new Events_Manager(label,word_font,word_style,word_size));
+        }
 
+        private class Events_Manager implements ActionListener{
+
+            private String menu_element, word_font;
+            private int word_style, word_size;
+
+            public Events_Manager(String menu_element, String word_font, int word_style, int word_size) {
+                this.menu_element = menu_element;
+                this.word_font = word_font;
+                this.word_style = word_style;
+                this.word_size = word_size;
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                myArea.setFont(new Font(word_font,word_style,word_size));
+            }
         }
     }
 }
