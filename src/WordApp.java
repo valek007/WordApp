@@ -56,6 +56,31 @@ public class WordApp {
 
             add(myArea,BorderLayout.CENTER);
 
+            //-----Menu Items---------------------------
+
+            menuConfig("Arial","font","",0,0);
+            menuConfig("Courier","font","",0,0);
+            menuConfig("Verdana","font","",0,0);
+
+            menuConfig("Bold","style","",0,0);
+            menuConfig("Italic","style","",0,0);
+
+            menuConfig("12","size","",0,0);
+            menuConfig("16","size","",0,0);
+            menuConfig("20","size","",0,0);
+            menuConfig("24","size","",0,0);
+
+        }
+
+        public void menuConfig(String label, String menu, String word_font, int word_style, int word_size){
+
+            JMenuItem menu_element = new JMenuItem(label);
+
+            if(menu.equals("font")) fontWord.add(menu_element);
+            else if(menu.equals("style")) styleWord.add(menu_element);
+            else if(menu.equals("size")) sizeWord.add(menu_element);
+
+
         }
     }
 }
