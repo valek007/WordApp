@@ -39,6 +39,7 @@ public class WordApp {
         //--------Text Area---------------------------
 
         private JTextPane myArea = new JTextPane();
+        private Font letters;
 
         public MyPanel() {
 
@@ -97,6 +98,23 @@ public class WordApp {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                letters = myArea.getFont();
+
+                if(menu_element=="Arial"||menu_element=="Comic Sans"||menu_element=="Verdana"){
+                    word_style=letters.getStyle();
+                    word_size=letters.getSize();
+                }else if(menu_element=="Bold"||menu_element=="Italic"){
+                    if(letters.getStyle()==1||letters.getStyle()==2){
+                        word_style=3;
+                    }
+                    word_font=letters.getFontName();
+                    word_size=letters.getSize();
+                }else{
+                    word_font=letters.getFontName();
+                    word_style=letters.getStyle();
+                }
+
 
                 myArea.setFont(new Font(word_font,word_style,word_size));
             }
