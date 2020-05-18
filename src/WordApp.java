@@ -1,7 +1,6 @@
 import javax.swing.*;
+import javax.swing.text.StyledEditorKit;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class WordApp {
 
@@ -77,9 +76,19 @@ public class WordApp {
 
             JMenuItem menu_element = new JMenuItem(label);
 
-            if(menu.equals("font")) fontWord.add(menu_element);
-            else if(menu.equals("style")) styleWord.add(menu_element);
-            else if(menu.equals("size")) sizeWord.add(menu_element);
+            if(menu.equals("font")){
+                fontWord.add(menu_element);
+                menu_element.addActionListener(new StyledEditorKit.FontFamilyAction(menu,word_font));
+            }
+            else if(menu.equals("style")){
+                styleWord.add(menu_element);
+                if(word_style==Font.BOLD) menu_element.addActionListener(new StyledEditorKit.BoldAction());
+                else menu_element.addActionListener(new StyledEditorKit.ItalicAction());
+            }
+            else if(menu.equals("size")){
+                sizeWord.add(menu_element);
+                menu_element.addActionListener(new StyledEditorKit.FontSizeAction(menu,word_size));
+            }
         }
     }
 }
