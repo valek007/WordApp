@@ -80,44 +80,6 @@ public class WordApp {
             if(menu.equals("font")) fontWord.add(menu_element);
             else if(menu.equals("style")) styleWord.add(menu_element);
             else if(menu.equals("size")) sizeWord.add(menu_element);
-
-            menu_element.addActionListener(new Events_Manager(label,word_font,word_style,word_size));
-        }
-
-        private class Events_Manager implements ActionListener{
-
-            private String menu_element, word_font;
-            private int word_style, word_size;
-
-            public Events_Manager(String menu_element, String word_font, int word_style, int word_size) {
-                this.menu_element = menu_element;
-                this.word_font = word_font;
-                this.word_style = word_style;
-                this.word_size = word_size;
-            }
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                letters = myArea.getFont();
-
-                if(menu_element=="Arial"||menu_element=="Comic Sans"||menu_element=="Verdana"){
-                    word_style=letters.getStyle();
-                    word_size=letters.getSize();
-                }else if(menu_element=="Bold"||menu_element=="Italic"){
-                    if(letters.getStyle()==1||letters.getStyle()==2){
-                        word_style=3;
-                    }
-                    word_font=letters.getFontName();
-                    word_size=letters.getSize();
-                }else{
-                    word_font=letters.getFontName();
-                    word_style=letters.getStyle();
-                }
-
-
-                myArea.setFont(new Font(word_font,word_style,word_size));
-            }
         }
     }
 }
