@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 
@@ -59,23 +60,27 @@ public class WordApp {
 
             //-----Menu Items---------------------------
 
-            menuConfig("Arial","font","Arial",9,10);
-            menuConfig("Comic Sans","font","Comic Sans MS",9,10);
-            menuConfig("Verdana","font","Verdana",9,10);
+            menuConfig("Arial","font","Arial",9,10,"");
+            menuConfig("Comic Sans","font","Comic Sans MS",9,10,"");
+            menuConfig("Verdana","font","Verdana",9,10,"");
 
-            menuConfig("Bold","style","",Font.BOLD,10);
-            menuConfig("Italic","style","",Font.ITALIC,10);
+            menuConfig("Bold","style","",Font.BOLD,10,"out/production/WordProcessor/resources/bold.png");
+            menuConfig("Italic","style","",Font.ITALIC,10,"out/production/WordProcessor/resources/italic.png");
 
-            menuConfig("12","size","",9,12);
-            menuConfig("16","size","",9,16);
-            menuConfig("20","size","",9,20);
-            menuConfig("24","size","",9,24);
+            menuConfig("12","size","",9,12,"");
+            menuConfig("16","size","",9,16,"");
+            menuConfig("20","size","",9,20,"");
+            menuConfig("24","size","",9,24,"");
+
+            menuConfig("Cut","edit","",9,12,"out/production/WordProcessor/resources/cut.png");
+            menuConfig("Copy","edit","",9,12,"out/production/WordProcessor/resources/copy.png");
+            menuConfig("Paste","edit","",9,12,"out/production/WordProcessor/resources/paste.png");
 
         }
 
-        public void menuConfig(String label, String menu, String word_font, int word_style, int word_size){
+        public void menuConfig(String label, String menu, String word_font, int word_style, int word_size, String icon){
 
-            JMenuItem menu_element = new JMenuItem(label);
+            JMenuItem menu_element = new JMenuItem(label, new ImageIcon(icon));
 
             if(menu.equals("font")){
                 fontWord.add(menu_element);
@@ -89,6 +94,12 @@ public class WordApp {
             else if(menu.equals("size")){
                 sizeWord.add(menu_element);
                 menu_element.addActionListener(new StyledEditorKit.FontSizeAction(menu,word_size));
+            }
+            else if(menu.equals("edit")){
+                editWord.add(menu_element);
+                if(label.equals("Cut")) menu_element.addActionListener(new DefaultEditorKit.CutAction());
+                else if(label.equals("Copy")) menu_element.addActionListener(new DefaultEditorKit.CopyAction());
+                else if(label.equals("Paste")) menu_element.addActionListener(new DefaultEditorKit.PasteAction());
             }
         }
     }
