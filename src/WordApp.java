@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.StyledEditorKit;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 public class WordApp {
 
@@ -13,10 +15,13 @@ public class WordApp {
     static class MyFrame extends JFrame {
 
         private MyPanel panel = new MyPanel();
+        private Toolkit myScreen = Toolkit.getDefaultToolkit();
+        private Image iconImage = myScreen.getImage("out/production/WordProcessor/resources/pencil.png");
 
         public MyFrame(){
 
             setTitle("Word Processor");
+            setIconImage(iconImage);
             setBounds(600,200,500,400);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setResizable(false);
@@ -35,9 +40,6 @@ public class WordApp {
         private JMenu fontWord = new JMenu("Font");
         private JMenu styleWord = new JMenu("Style");
         private JMenu sizeWord = new JMenu("Size");
-        private JMenu editWord = new JMenu("Edit");
-
-
 
         //--------Text Area---------------------------
 
@@ -88,8 +90,14 @@ public class WordApp {
             }
             else if(menu.equals("style")){
                 styleWord.add(menu_check_element);
-                if(word_style==Font.BOLD) menu_check_element.addActionListener(new StyledEditorKit.BoldAction());
-                else menu_check_element.addActionListener(new StyledEditorKit.ItalicAction());
+                if(word_style==Font.BOLD){
+                    menu_check_element.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B,InputEvent.CTRL_DOWN_MASK));
+                    menu_check_element.addActionListener(new StyledEditorKit.BoldAction());
+                }
+                else{
+                    menu_check_element.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,InputEvent.CTRL_DOWN_MASK));
+                    menu_check_element.addActionListener(new StyledEditorKit.ItalicAction());
+                }
             }
             else if(menu.equals("edit")){
                 popMenu.add(menu_element);
@@ -104,7 +112,7 @@ public class WordApp {
             ButtonGroup size_group = new ButtonGroup();
             String name = "";
 
-            for(int i=12;i<50;i=i+4){
+            for(int i=12;i<25;i=i+4){
 
                 JRadioButtonMenuItem num = new JRadioButtonMenuItem(name+i);
                 num.addActionListener(new StyledEditorKit.FontSizeAction("size",i));
