@@ -36,10 +36,6 @@ public class WordApp {
         private JMenu sizeWord = new JMenu("Size");
         private JMenu editWord = new JMenu("Edit");
 
-        private JMenuItem cutWord = new JMenuItem("Cut", new ImageIcon("out/production/WordProcessor/resources/cut.gif"));
-        private JMenuItem copyWord = new JMenuItem("Copy", new ImageIcon("out/production/WordProcessor/resources/copy.gif"));
-        private JMenuItem pasteWord = new JMenuItem("Paste", new ImageIcon("out/production/WordProcessor/resources/paste.gif"));
-
         //--------Text Area---------------------------
 
         private JTextPane myArea = new JTextPane();
@@ -50,15 +46,6 @@ public class WordApp {
             setLayout(new BorderLayout());
 
             //----Menu Bar------------------------------
-
-            cutWord.setHorizontalTextPosition(SwingConstants.RIGHT);
-            copyWord.setHorizontalTextPosition(SwingConstants.RIGHT);
-            pasteWord.setHorizontalTextPosition(SwingConstants.RIGHT);
-
-            editWord.add(cutWord);
-            editWord.add(copyWord);
-            editWord.add(pasteWord);
-
             menuBar.add(fontWord);
             menuBar.add(styleWord);
             menuBar.add(sizeWord);
@@ -83,6 +70,7 @@ public class WordApp {
             menuConfig("16","size","",9,16);
             menuConfig("20","size","",9,20);
             menuConfig("24","size","",9,24);
+
         }
 
         public void menuConfig(String label, String menu, String word_font, int word_style, int word_size){
