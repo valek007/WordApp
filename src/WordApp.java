@@ -38,9 +38,11 @@ public class WordApp {
         private JMenu editWord = new JMenu("Edit");
 
 
+
         //--------Text Area---------------------------
 
         private JTextPane myArea = new JTextPane();
+        private JPopupMenu popMenu = new JPopupMenu();
 
         public MyPanel() {
 
@@ -52,13 +54,13 @@ public class WordApp {
             menuBar.add(fontWord);
             menuBar.add(styleWord);
             menuBar.add(sizeWord);
-            menuBar.add(editWord);
             menuPanel.add(menuBar);
             add(menuPanel,BorderLayout.NORTH);
 
             //-----Text Area-----------------------------
 
             add(myArea,BorderLayout.CENTER);
+            myArea.setComponentPopupMenu(popMenu);
 
             //-----Menu Items---------------------------
 
@@ -90,7 +92,7 @@ public class WordApp {
                 else menu_check_element.addActionListener(new StyledEditorKit.ItalicAction());
             }
             else if(menu.equals("edit")){
-                editWord.add(menu_element);
+                popMenu.add(menu_element);
                 if(label.equals("Cut")) menu_element.addActionListener(new DefaultEditorKit.CutAction());
                 else if(label.equals("Copy")) menu_element.addActionListener(new DefaultEditorKit.CopyAction());
                 else if(label.equals("Paste")) menu_element.addActionListener(new DefaultEditorKit.PasteAction());
@@ -102,8 +104,8 @@ public class WordApp {
             ButtonGroup size_group = new ButtonGroup();
             String name = "";
 
-            for(int i=12;i<25;i=i+4){
-                
+            for(int i=12;i<50;i=i+4){
+
                 JRadioButtonMenuItem num = new JRadioButtonMenuItem(name+i);
                 num.addActionListener(new StyledEditorKit.FontSizeAction("size",i));
                 size_group.add(num);
