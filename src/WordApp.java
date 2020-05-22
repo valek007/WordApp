@@ -45,6 +45,10 @@ public class WordApp {
 
         private JTextPane myArea = new JTextPane();
         private JPopupMenu popMenu = new JPopupMenu();
+        private JToolBar toolBar = new JToolBar();
+        private JButton boldButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/bold.png"));
+        private JButton italicButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/italic.png"));
+        private JButton underlinedButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/underlined.png"));
 
         public MyPanel() {
 
@@ -63,6 +67,14 @@ public class WordApp {
 
             add(myArea,BorderLayout.CENTER);
             myArea.setComponentPopupMenu(popMenu);
+            boldButton.addActionListener(new StyledEditorKit.BoldAction());
+            italicButton.addActionListener(new StyledEditorKit.ItalicAction());
+            underlinedButton.addActionListener(new StyledEditorKit.UnderlineAction());
+            toolBar.add(boldButton);
+            toolBar.add(italicButton);
+            toolBar.add(underlinedButton);
+            toolBar.setOrientation(1);
+            add(toolBar, BorderLayout.WEST);
 
             //-----Menu Items---------------------------
 
