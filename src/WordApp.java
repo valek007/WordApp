@@ -46,8 +46,7 @@ public class WordApp {
         private JTextPane myArea = new JTextPane();
         private JPopupMenu popMenu = new JPopupMenu();
         private JToolBar toolBar = new JToolBar();
-
-
+        private static final String RESOURCES = "out/production/WordProcessor/resources/";
 
         public MyPanel() {
 
@@ -67,7 +66,18 @@ public class WordApp {
             add(myArea,BorderLayout.CENTER);
             myArea.setComponentPopupMenu(popMenu);
 
-           
+            configToolBar("bold.png").addActionListener(new StyledEditorKit.BoldAction());
+            configToolBar("italic.png").addActionListener(new StyledEditorKit.ItalicAction());
+            configToolBar("underlined.png").addActionListener(new StyledEditorKit.UnderlineAction());
+            toolBar.addSeparator();
+            configToolBar("red.png").addActionListener(new StyledEditorKit.ForegroundAction("Red",Color.RED));
+            configToolBar("yellow.png").addActionListener(new StyledEditorKit.ForegroundAction("Yellow",Color.YELLOW));
+            configToolBar("blue.png").addActionListener(new StyledEditorKit.ForegroundAction("Blue",Color.BLUE));
+            toolBar.addSeparator();
+            configToolBar("right-text.png").addActionListener(new StyledEditorKit.AlignmentAction("left-text",2));
+            configToolBar("left-text.png").addActionListener(new StyledEditorKit.AlignmentAction("center-text",0));
+            configToolBar("center-text.png").addActionListener(new StyledEditorKit.AlignmentAction("right-text",1));
+            configToolBar("justified-text.png").addActionListener(new StyledEditorKit.AlignmentAction("justiefied-text",3));
 
             toolBar.setOrientation(1);
             add(toolBar, BorderLayout.WEST);
@@ -85,6 +95,10 @@ public class WordApp {
             menuConfig("Copy","edit","",9,12,"out/production/WordProcessor/resources/copy.png");
             menuConfig("Paste","edit","",9,12,"out/production/WordProcessor/resources/paste.png");
 
+        }
+        public JButton configToolBar(String icon_url){
+
+            return (JButton) toolBar.add(new JButton(new ImageIcon(RESOURCES+icon_url)));
         }
 
         public void menuConfig(String label, String menu, String word_font, int word_style, int word_size, String icon){
