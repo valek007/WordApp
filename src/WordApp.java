@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.StyledEditorKit;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class WordApp {
 
@@ -47,7 +46,7 @@ public class WordApp {
 
             setLayout(new BorderLayout());
 
-            getRadioElement();
+            getRadioElements();
 
             //----Menu Bar------------------------------
             menuBar.add(fontWord);
@@ -98,28 +97,18 @@ public class WordApp {
             }
         }
 
-        private void getRadioElement(){
+        private void getRadioElements(){
 
             ButtonGroup size_group = new ButtonGroup();
+            String name = "";
 
-            JRadioButtonMenuItem num12 = new JRadioButtonMenuItem("12");
-            num12.addActionListener(new StyledEditorKit.FontSizeAction("size",12));
-            JRadioButtonMenuItem num16 = new JRadioButtonMenuItem("16");
-            num16.addActionListener(new StyledEditorKit.FontSizeAction("size",16));
-            JRadioButtonMenuItem num20 = new JRadioButtonMenuItem("20");
-            num20.addActionListener(new StyledEditorKit.FontSizeAction("size",20));
-            JRadioButtonMenuItem num24 = new JRadioButtonMenuItem("24");
-            num24.addActionListener(new StyledEditorKit.FontSizeAction("size",24));
-
-            size_group.add(num12);
-            size_group.add(num16);
-            size_group.add(num20);
-            size_group.add(num24);
-
-            sizeWord.add(num12);
-            sizeWord.add(num16);
-            sizeWord.add(num20);
-            sizeWord.add(num24);
+            for(int i=12;i<25;i=i+4){
+                
+                JRadioButtonMenuItem num = new JRadioButtonMenuItem(name+i);
+                num.addActionListener(new StyledEditorKit.FontSizeAction("size",i));
+                size_group.add(num);
+                sizeWord.add(num);
+            }
         }
     }
 }
