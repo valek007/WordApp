@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.StyledEditorKit;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class WordApp {
 
@@ -37,14 +38,16 @@ public class WordApp {
         private JMenu sizeWord = new JMenu("Size");
         private JMenu editWord = new JMenu("Edit");
 
+
         //--------Text Area---------------------------
 
         private JTextPane myArea = new JTextPane();
-        private Font letters;
 
         public MyPanel() {
 
             setLayout(new BorderLayout());
+
+            getRadioElement();
 
             //----Menu Bar------------------------------
             menuBar.add(fontWord);
@@ -67,11 +70,6 @@ public class WordApp {
             menuConfig("Bold","style","",Font.BOLD,10,"out/production/WordProcessor/resources/bold.png");
             menuConfig("Italic","style","",Font.ITALIC,10,"out/production/WordProcessor/resources/italic.png");
 
-            menuConfig("12","size","",9,12,"");
-            menuConfig("16","size","",9,16,"");
-            menuConfig("20","size","",9,20,"");
-            menuConfig("24","size","",9,24,"");
-
             menuConfig("Cut","edit","",9,12,"out/production/WordProcessor/resources/cut.png");
             menuConfig("Copy","edit","",9,12,"out/production/WordProcessor/resources/copy.png");
             menuConfig("Paste","edit","",9,12,"out/production/WordProcessor/resources/paste.png");
@@ -80,20 +78,17 @@ public class WordApp {
 
         public void menuConfig(String label, String menu, String word_font, int word_style, int word_size, String icon){
 
-            JMenuItem menu_element = new JMenuItem(label, new ImageIcon(icon));
+                JCheckBoxMenuItem menu_check_element = new JCheckBoxMenuItem(label, new ImageIcon(icon));
+                JMenuItem menu_element = new JMenuItem(label, new ImageIcon(icon));
 
             if(menu.equals("font")){
                 fontWord.add(menu_element);
                 menu_element.addActionListener(new StyledEditorKit.FontFamilyAction(menu,word_font));
             }
             else if(menu.equals("style")){
-                styleWord.add(menu_element);
-                if(word_style==Font.BOLD) menu_element.addActionListener(new StyledEditorKit.BoldAction());
-                else menu_element.addActionListener(new StyledEditorKit.ItalicAction());
-            }
-            else if(menu.equals("size")){
-                sizeWord.add(menu_element);
-                menu_element.addActionListener(new StyledEditorKit.FontSizeAction(menu,word_size));
+                styleWord.add(menu_check_element);
+                if(word_style==Font.BOLD) menu_check_element.addActionListener(new StyledEditorKit.BoldAction());
+                else menu_check_element.addActionListener(new StyledEditorKit.ItalicAction());
             }
             else if(menu.equals("edit")){
                 editWord.add(menu_element);
@@ -101,6 +96,30 @@ public class WordApp {
                 else if(label.equals("Copy")) menu_element.addActionListener(new DefaultEditorKit.CopyAction());
                 else if(label.equals("Paste")) menu_element.addActionListener(new DefaultEditorKit.PasteAction());
             }
+        }
+
+        private void getRadioElement(){
+
+            ButtonGroup size_group = new ButtonGroup();
+
+            JRadioButtonMenuItem num12 = new JRadioButtonMenuItem("12");
+            num12.addActionListener(new StyledEditorKit.FontSizeAction("size",12));
+            JRadioButtonMenuItem num16 = new JRadioButtonMenuItem("16");
+            num16.addActionListener(new StyledEditorKit.FontSizeAction("size",16));
+            JRadioButtonMenuItem num20 = new JRadioButtonMenuItem("20");
+            num20.addActionListener(new StyledEditorKit.FontSizeAction("size",20));
+            JRadioButtonMenuItem num24 = new JRadioButtonMenuItem("24");
+            num24.addActionListener(new StyledEditorKit.FontSizeAction("size",24));
+
+            size_group.add(num12);
+            size_group.add(num16);
+            size_group.add(num20);
+            size_group.add(num24);
+
+            sizeWord.add(num12);
+            sizeWord.add(num16);
+            sizeWord.add(num20);
+            sizeWord.add(num24);
         }
     }
 }
