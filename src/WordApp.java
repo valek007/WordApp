@@ -49,6 +49,13 @@ public class WordApp {
         private JButton boldButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/bold.png"));
         private JButton italicButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/italic.png"));
         private JButton underlinedButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/underlined.png"));
+        private JButton redButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/red.png"));
+        private JButton yellowButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/yellow.png"));
+        private JButton blueButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/blue.png"));
+        private JButton rightTextButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/right-text.png"));
+        private JButton leftTextButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/left-text.png"));
+        private JButton centerTextButton = new JButton(new ImageIcon("out/production/WordProcessor/resources/center-text.png"));
+
 
         public MyPanel() {
 
@@ -67,12 +74,27 @@ public class WordApp {
 
             add(myArea,BorderLayout.CENTER);
             myArea.setComponentPopupMenu(popMenu);
+
             boldButton.addActionListener(new StyledEditorKit.BoldAction());
             italicButton.addActionListener(new StyledEditorKit.ItalicAction());
             underlinedButton.addActionListener(new StyledEditorKit.UnderlineAction());
+            redButton.addActionListener(new StyledEditorKit.ForegroundAction("Red",Color.RED));
+            yellowButton.addActionListener(new StyledEditorKit.ForegroundAction("Yellow",Color.YELLOW));
+            blueButton.addActionListener(new StyledEditorKit.ForegroundAction("Blue",Color.BLUE));
+            rightTextButton.addActionListener(new StyledEditorKit.AlignmentAction("right-text",2));
+            leftTextButton.addActionListener(new StyledEditorKit.AlignmentAction("left-text",3));
+            centerTextButton.addActionListener(new StyledEditorKit.AlignmentAction("center-text",1));
+
             toolBar.add(boldButton);
             toolBar.add(italicButton);
             toolBar.add(underlinedButton);
+            toolBar.add(redButton);
+            toolBar.add(yellowButton);
+            toolBar.add(blueButton);
+            toolBar.add(rightTextButton);
+            toolBar.add(leftTextButton);
+            toolBar.add(centerTextButton);
+
             toolBar.setOrientation(1);
             add(toolBar, BorderLayout.WEST);
 
